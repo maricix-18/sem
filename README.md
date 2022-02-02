@@ -1,5 +1,5 @@
 first read me <3
-<3
+<3 ..
 
 ![workflow](https://github.com/<maricix-18>/<sem>/actions/workflows/main.yml/badge.svg)
 
