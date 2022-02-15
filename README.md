@@ -1,5 +1,4 @@
-first read me <3
-<3
+#Develop Branch
 
 [![workflow](https://img.shields.io/github/workflow/status/maricix-18/sem/A%20workflow%20for%20my%20Hello%20World%20App)](https://github.com/maricix-18/sem/actions/workflows/main.yml/badge.svg)
 
