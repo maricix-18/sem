@@ -2,6 +2,7 @@ package com.napier.sem;
 
 import java.sql.*;
 
+
 public class App
 {
     /**
@@ -80,9 +81,11 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT emp_no, first_name, last_name "
+                    "SELECT title, salary, employees.emp_no as emp, first_name, last_name "
                             + "FROM employees "
-                            + "WHERE emp_no = " + ID;
+                            + "join titles on (employees.emp_no=titles.emp_no)"
+                            + "join salaries on (employees.emp_no=salaries.emp_no)"
+                            + "WHERE employees.emp_no = " + ID;
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new employee if valid.
@@ -90,7 +93,11 @@ public class App
             if (rset.next())
             {
                 Employee emp = new Employee();
-                emp.emp_no = rset.getInt("emp_no");
+                emp.title = rset.getString("title");
+                emp.salary = rset.getInt("salary");
+                //emp.dept_name = rset.getString("dept_name");
+                //emp.manager = rset.getString("manager");
+                emp.emp_no = rset.getInt("emp");
                 emp.first_name = rset.getString("first_name");
                 emp.last_name = rset.getString("last_name");
                 return emp;
@@ -117,9 +124,9 @@ public class App
                     emp.emp_no + " "
                             + emp.first_name + " "
                             + emp.last_name + "\n"
-                            + emp.title + "\n"
+                            + "Title: " + emp.title + "\n"
                             + "Salary:" + emp.salary + "\n"
-                            + emp.dept_name + "\n"
+                            + "Department: " + emp.dept_name + "\n"
                             + "Manager: " + emp.manager + "\n");
         }
     }
