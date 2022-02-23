@@ -4,7 +4,7 @@
 
 ### Goal in Context
 
-*a longer statement of the goal, if needed*
+As an department manager *I want to* produce a report on the salary of employees in my department *so that* I can support financial reporting for my department.
 
 ### Scope
 

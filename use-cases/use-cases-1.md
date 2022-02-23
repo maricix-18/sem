@@ -4,56 +4,52 @@
 
 ### Goal in Context
 
-*a longer statement of the goal, if needed*
+As an *HR advisor* I want *produce a report on the salary of all employees *so that* I can support financial reporting of the organisation.*
 
 ### Scope
 
-*what system is considered black-box under design*
+Company.
 
 ### Level
 
-*one of: Summary, Primary task, subfunction*
+ Primary task..
 
 ### Preconditions
 
-*what we expect is already the state of the world*
+We know the role.  Database contains current employee salary data.
 
 ### Success End Condition
 
-*the state of the world upon successful completion*
+A report is available for HR to provide to finance.
 
 ### Failed End Condition
 
-*the state of the world if goal abandoned*
+No report is produced.
 
 ### Primary Actor
 
-*a role name for the primary actor, or description*
+HR Advisor.
 
 ### Trigger
 
-*the action upon the system that starts the use case, may be a time event*
+A request for finance information is sent to HR.
 
 ## MAIN SUCCESS SCENARIO
 
-*put here the steps of the scenario from trigger to goal delivery, and any cleanup after*
-
-1. action description
+1. Finance request salary information for a given role.
+2. HR advisor captures name of the role to get salary information for.
+3. HR advisor extracts current salary information of all employees of the given role.
+4. HR advisor provides report to finance.
 
 ## EXTENSIONS
 
-*put here the extensions, one at a time, each referring to the step of the main scenario*
-
-1. **Condition**: action of sub use case
+3. **Role does not exist**:
+    1. HR advisor informs finance no role exists.
 
 ## SUB-VARIATIONS
 
-*put here the sub-variations that will cause eventual branching in the scenario
-
-1. list of sub-variations
+None.
 
 ## SCHEDULE
 
-**DUE DATE**: *date or release of deployment*
-
-*any other schedule/staffing information you need*
+**DUE DATE**: Release 1.0

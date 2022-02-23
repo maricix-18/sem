@@ -3,7 +3,7 @@
 
 ### Goal in Context
 
-*a longer statement of the goal, if needed*
+s an HR advisor *I want to* delete an employee's details *so that* the company is compliant with data retention legislation.
 
 ### Scope
 

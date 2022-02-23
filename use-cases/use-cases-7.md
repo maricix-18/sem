@@ -4,7 +4,7 @@
 
 ### Goal in Context
 
-*a longer statement of the goal, if needed*
+As an HR advisor *I want to* update an employee's details *so that* employee's details are kept up-to-date.
 
 ### Scope
 
