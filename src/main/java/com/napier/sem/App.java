@@ -73,6 +73,84 @@ public class App
     }
 
     /**
+     * getDepartment method
+     * @parameter: dept_no
+     */
+    public Department getDepartment(String dept_name){
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    " SELECT dept_no, dept_name "
+          +" FROM departments "
+          +" Where dept_name =  '" + dept_name+"' ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new employee if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+                Department dept = new Department();
+                dept.dept_no = rset.getString("dept_no");
+                dept.dept_name=rset.getString("dept_name");
+                return dept;
+            }
+            else
+                return null;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get department details");
+            return null;
+        }
+    }
+
+    /**
+     * get salaries by department method
+     * @param dept
+     * @return a list of employees working in that department and their salaries
+     */
+    public ArrayList<Employee> getSalariesByDepartment(Department dept){
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    " SELECT employees.emp_no, employees.first_name, employees.last_name, salaries.salary "
+                            +" FROM employees, salaries, dept_emp, departments "
+                            +" WHERE employees.emp_no = salaries.emp_no "
+                            +" AND employees.emp_no = dept_emp.emp_no "
+                            +"  AND dept_emp.dept_no = departments.dept_no "
+                            +" AND salaries.to_date = '9999-01-01' "
+                            +" AND departments.dept_no =  '" + dept.dept_no+"' "
+                            + " ORDER BY employees.emp_no ASC ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract employee information
+            ArrayList<Employee> employees = new ArrayList<Employee>();
+            while (rset.next())
+            {
+                Employee emp = new Employee();
+                emp.emp_no = rset.getInt("employees.emp_no");
+                emp.first_name = rset.getString("employees.first_name");
+                emp.last_name = rset.getString("employees.last_name");
+                emp.salary = rset.getInt("salaries.salary");
+                employees.add(emp);
+            }
+            return employees;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get salary details");
+            return null;
+        }
+    }
+    /**
      * getEmployee method
      */
     public Employee getEmployee(int ID)
@@ -236,7 +314,7 @@ public class App
         /**
          * Extract employee salary information
          */
-        //ArrayList<Employee> employees = a.getAllSalaries();
+        // ArrayList<Employee> employees = a.getAllSalaries();
         //  a.printSalaries(employees);
 
         /**
@@ -248,9 +326,18 @@ public class App
          *  Get salary by role
          *  ex role: engineer
          */
-        ArrayList<Employee> employees = a.getSalaryByRole("Engineer");
-        a.printSalaries(employees);
+        // ArrayList<Employee> employees = a.getSalaryByRole("Engineer");
+        //  a.printSalaries(employees);
 
+        /**
+         * Get salary by department
+         */
+        Department dept= new Department();
+        dept.dept_no=a.getDepartment("Sales").dept_no;
+        dept.dept_name=a.getDepartment("Sales").dept_name;
+        System.out.println(dept.dept_name+" "+dept.dept_no);
+        ArrayList<Employee> employeesByDepartment = a.getSalariesByDepartment(dept);
+        a.printSalaries(employeesByDepartment);
         // Disconnect from database
         a.disconnect();
     }
